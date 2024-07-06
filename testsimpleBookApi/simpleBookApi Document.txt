@@ -1,0 +1,101 @@
+                                      Simple Book API 
+
+   This api allows you to order a book api is available at
+    baseURI= https://simple-books-api.glitch.me
+    
+ Endpoints
+  GET request
+             https://simple-books-api.glitch.me/status
+
+it returns the status of api
+
+-List of Books
+   get request
+             baseURI/books
+      
+ it return a list of books
+ optional Query parameter
+   * type:fiction or non-fiction
+   * limit: a number between 1 & 20
+
+-Get a single book
+    get request
+             baseURI/books/:bookid
+it retrieve detail information of a single book
+
+- API AUTHENTICATION:
+ if you view or create new order you require authenctication
+   post request
+            baseURI/api-clients/
+  and request body contain following properties
+         clientName-string
+         clientEmail-string
+Example:
+         {
+           "clientName":"kiran",
+            "clientEmail":"abd@gmail.com"
+          }
+
+
+
+
+-Sumbit an Order
+     Post request
+              baseURI/orders
+
+it allows you to sumbit a new order requires authentication
+The request body need to be in json format and include following format
+    * bookid - integer 
+    *CustomerName-string
+
+Example:
+       { 
+        "bookId":1,
+         "customerName":"sagar"
+        }
+ also hehe pass your <barer Token> to sumbit order
+
+-Get an order
+
+ get request
+           baseURI/orders/:orderId
+ it allows you to view a single existing order requires authentication
+
+
+
+- Get all orders
+    
+       get request
+             baseURI/orders
+it allows you to view all orders rquire authentication
+
+
+- Updade an order
+   patch request
+             baseURI/orders/:orderId
+ update an order require authentiction an request body in json format and it conain
+      * customerName-string
+
+Example:{
+         "customerName":"patil"
+         }
+also pass <barerToken> in request body
+
+
+-Delete an order
+  delete request
+           baseURI/orders/:orderid
+it delete the user so request body should be empty and pass the < barerToken> in request
+
+
+
+Note: if any issue please try first in postaman tool
+
+
+
+
+
+    
+ 
+            
+               

@@ -1,0 +1,25 @@
+test cases of simplebookApi
+ verify status of the api
+ verify type of fiction books within limit(1 to 20)
+ verify type of non fiction books within limit(1 to 20)
+ verify type of fiction books beyond limit(-1 or 21)
+ verify type of non fiction books beyond limit(-1 or 31)
+ verify getting detail information about single book by providing valid bookid number
+verify getting detail information about single book by providing invalid bookid number
+ verify it allows to sumbit new order without authenctition
+verify it allows to sumbit new order with authenctition
+verify it allows to sumbit new order with other datatype(html,xml,plaintext)
+verify it allows to sumbit new order with invalid data in payload(missing bookid  customernameis null)
+
+verify to view the new order with invalid orderid with authentication
+verify to view the new order with valid orderid with authentication
+verify to view the new order with valid orderid without authentication
+verify to view the all new order  without authentication
+verify to view the all  new order  with authentication
+verify it allows to update customerName valid orderid with authentication
+verify it allows to update customerName invalid orderid with authentication
+verify it allows to update missing customer name or customer is null
+verify it allows delete order with invalid orderid with authentication
+verify it allows delete order with valid orderid without authentication
+verify it allows delete order with empty request body with authentication
+
