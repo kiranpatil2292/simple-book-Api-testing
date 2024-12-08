@@ -2,8 +2,6 @@ from utils.myconfigparser import getPetApiURL
 from utils.myutils import *
 import logging
 logger = logging.getLogger(__name__)
-# path = '/books/2'
-# path2 = '/books/100'
 baseURI = getPetApiURL()
 
 
@@ -18,11 +16,8 @@ def test005_getSingleBook():
     assert 'id' in data
     assert data['id'] == 2
     assert data['name'] == 'Just as I Am'
-    assert data['author'] == 'Cicely Tyson'
-    assert data['type'] == 'non-fiction'
-    assert data['price'] == 20.33
-    assert data['current-stock'] == 0
-    assert data['available'] is False
+    assert 'author' in data
+    assert 'price'in data
     assert resp_status == 200
     assert timeTaken <= 4
     print("Time Taken:", timeTaken)

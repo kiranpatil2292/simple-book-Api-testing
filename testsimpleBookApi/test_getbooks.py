@@ -54,6 +54,7 @@ def test003_get_allNon_Fiction_Books():
     assert resp_status == 400
     assert timeTaken <= 4
     print("Time Taken:", timeTaken)
+    print(data)
 
 
 # verify type of fiction  book beyond limit

@@ -1,15 +1,8 @@
 import logging
 from utils.myconfigparser import getPetApiURL
-
 logger = logging.getLogger(__name__)
 from utils.myutils import getApiData, postApidata
-
 baseURI = getPetApiURL()
-path = '/orders/{orderid}'
-path2 = '/orders/{orderid}'  # please pass invalid orderid value
-
-
-# view the order with valid orderid
 
 
 def test0010_View_SingleOrder(place_order, get_token):
@@ -18,10 +11,10 @@ def test0010_View_SingleOrder(place_order, get_token):
     print(orderid)
     # url = baseURI + path.format(orderid=orderid)
     url = baseURI + f'/orders/{orderid}'
-
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {token}"}
     data, resp_status, timeTaken = getApiData(url, headers)
     print(data)
+    logger.info('user can able to view single order')
     assert resp_status == 200
     assert data.get("orderId") == orderid
 
@@ -34,6 +27,6 @@ def test0011_View_SingleOrder_invalid(get_token, place_order):
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {token}"}
     data, resp_status, timeTaken = getApiData(url, headers)
     print(data)
+    logger.info('user cannot view order of invalid orderId')
     assert resp_status == 404  # Assuming 404 Not Found for invalid order ID
     assert data.get("error") == 'Order not found'
-
