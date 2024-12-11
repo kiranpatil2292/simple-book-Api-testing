@@ -1,3 +1,5 @@
+import requests
+
 from utils.myutils import postApidata, getApiData
 from utils.myconfigparser import getPetApiURL
 import pytest
@@ -15,27 +17,29 @@ order = '/orders'
 # @pytest.mark.parametrize("customer_id, customer_name", [ (7, "john"), (8, "rajesh")])
 
 # def test007_PlaceOrder(get_token, customer_id, customer_name):
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def place_order(get_token):
     token = get_token
     url = baseURI + '/orders'
     # payload = {"id": customer_id, "customerName": customer_name}
-    payload = {"id": random.randint(1, 10), "customerName": fake.name()}
+    payload = {"bookId": 1, "customerName": fake.name()}
     headers = {"content-Type": "application/json", "Authorization": f"Bearer {token}"}
-    data, resp_status, time_taken = postApidata(url, payload, headers)
-    logger.info('placing order with valid user with token')
-    # assert resp_status == 201
-    orderid = data.get("orderid")
-    print(orderid)
-    return orderid
+    resp = requests.post(url, json=payload, headers=headers)
+    resp.raise_for_status()  # Ensure the request succeeded
+    print(resp.text)
+    order_id = resp.json().get("orderId")
+    if not order_id:
+        raise ValueError(f"Order ID not found in response: {resp.json()}")
+
+    return order_id
 
 
 # # place order without token
-def test008_PlaceOrder(get_token):
+def test008_PlaceOrder(get_token,place_order):
     token = get_token
     print(token)
     url = baseURI + order
-    payload = {'id': random.randint(1,20), 'customerName': fake.name()}
+    payload = {"bookId": random.randint(1,20), "customerName": fake.name()}
     headers = {"content-Type": "application/json"}
     data, resp_status, timeTaken = postApidata(url, payload, headers)
     logger.info('placing order without token')
@@ -49,7 +53,7 @@ def test009_PlaceOrder(get_token):
     token = get_token
     print(token)
     url = baseURI + order
-    payload = {'id': random.uniform(10.0, 20.0), 'customerName': fake.name()}
+    payload = {"bookId": random.uniform(10.0, 20.0), "customerName": fake.name()}
     headers = {"content-Type": "application/json", "Authorization": f"Bearer {token}"}
     data, resp_status, timeTaken = postApidata(url, payload, headers)
     logger.info('placeing order with invalid user with token')
@@ -67,4 +71,4 @@ def test0010_View_SingleOrder(place_order, get_token):
     data, resp_status, timeTaken = getApiData(url, headers)
 
     assert resp_status == 200
-    assert data.get("orderId") == orderid
+    assert data.get("id") == orderid

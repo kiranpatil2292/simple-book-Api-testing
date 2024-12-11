@@ -31,10 +31,10 @@ def test_larger_payload():
     if response.status_code == 413:
         print("Payload too large:", response.json())
 
-
-url = "https://api.example.com/upload"
-large_payload = {"data": "x" * (6 * 1024 * 1024 + 1)}  # Payload > 10 MB
-response = requests.post(url, json=large_payload)
-
-if response.status_code == 200:
-    print("File uploaded successfully:", response.json())
+#
+# url = "https://api.example.com/upload"
+# large_payload = {"data": "x" * (6 * 1024 * 1024 + 1)}  # Payload > 10 MB
+# response = requests.post(url, json=large_payload)
+#
+# if response.status_code == 200:
+#     print("File uploaded successfully:", response.json())

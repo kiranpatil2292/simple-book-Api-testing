@@ -23,9 +23,9 @@ def test0014_update_order(get_token, place_order):
 
 
 # update order with invalid orderid
-def test0015_update_order(get_token):
+def test0015_update_order(get_token,place_order):
     token = get_token
-    orderid = 'as123njgh'
+    orderid = 'as123njghgyey123'
     url = baseURI + f'/orders/:{orderid}'
     payload = {'customerName': fake.name()}
     headers = {"content-Type": "application/json", "Authorization": f"Bearer {token}"}
